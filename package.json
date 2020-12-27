@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cookies": "^0.8.0",
+    "http-proxy": "^1.18.1",
     "next": "10.0.4",
     "react": "17.0.1",
     "react-cookie": "^4.0.3",

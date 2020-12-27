@@ -3,16 +3,26 @@ const serverLink = 'http://localhost:8888'
 const validate = async (token)=> {
     var options = {
         method: 'get',
+        withCredentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': token 
+          'Authorization': 'Bearer ' + token 
         },
     }
 
-    console.log(token)
-    console.log("validated!")
+    // options = JSON.stringify(options)
 
-    return 'failed'
+    var res = await fetch(`${serverLink}/auth/ping`, options)
+
+    console.log(token)
+    // console.log(res)
+
+    if (res.ok === true) {
+      return false
+    }
+
+    return false
 }
 
 export default validate

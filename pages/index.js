@@ -14,27 +14,21 @@ const add30 = () => {
 
 const Home = (pageProps) => {
 
-  const clickHandler = async (event)=> {
-    const res = await login()
-    console.log(res.token)
-
-    var expdate = add30()
-
-    cookies.set('tokenv5', res.token, {
-      path: '/',
-      expires: expdate
-    })
-
-    console.log(cookies)
-  }
   return (
-    <>
+    <React.Fragment>
       <div>Home page</div>
       <p>login to get started</p>
-      <Link href={'/user/dashboard'}>
-        <a>login</a>
-      </Link>
-    </>
+      <div>
+        <Link href={'/user/login'}>
+          <a>login</a>
+        </Link>
+      </div>
+      <div>
+        <Link href={'/user/login'}>
+          <a>register</a>
+        </Link>
+      </div>
+    </React.Fragment>
   )
 }
 

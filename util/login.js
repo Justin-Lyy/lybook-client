@@ -1,6 +1,8 @@
 const serverLink = 'http://localhost:8888'
 
-const login = async (data={'email': 'justin@gmail.com', 'password': 'testing'}) => {
+// ={'email': 'justin@gmail.com', 'password': 'testing'}
+
+const login = async (data) => {
     var options = {
         method: 'post',
         headers: {
@@ -9,15 +11,20 @@ const login = async (data={'email': 'justin@gmail.com', 'password': 'testing'}) 
         body: JSON.stringify(data)
     }
   
-    // console.log(data)
-  
+    console.log(data)
+
     try {
         const res = await fetch(`${serverLink}/auth/login`, options)
         const jsonres = await res.json()
-        // console.log(jsonres)
-        return jsonres
+        
+        if (res.ok) {
+            return {...jsonres, ok: true}
+        }
+        
+        throw 'Login failed'
     } catch(error) {
         console.log(error)
+        return {ok: false}
     }
 }
 

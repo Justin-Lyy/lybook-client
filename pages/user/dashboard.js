@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import Cookies from 'universal-cookie'
 import validate from '../../util/validate'
 import React from 'react'
@@ -10,8 +10,8 @@ const Dashboard = (pageProps) => {
 
 
     React.useEffect(async ()=>{
-        console.log(cookies.getAll())
-        console.log(pageProps)
+        if (pageProps.valid === false) router.push('./login')
+        
     },[])
 
     return (
@@ -24,13 +24,14 @@ const Dashboard = (pageProps) => {
 
 export async function getServerSideProps(context) {
     try {   
-       const res = await validate(context.req.cookies.tokenv5)
+       const res = await validate(context.req.cookies.tokenv6)
+        return {
+            props: {valid: res},
+        }
     } catch (error) {
         console.error(error)
     }
-    return {
-        props: {tokenv5: context.req.cookies.tokenv5},
-    }
+    
 }
 
 export default Dashboard
