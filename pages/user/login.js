@@ -2,8 +2,14 @@ import React from 'react'
 import login from '../../util/login'
 import Cookies from 'universal-cookie'
 import { useRouter } from 'next/router'
+import validateEmail from '../../util/emailRegex'
 
 const cookies = new Cookies()
+
+const add30 = () => {
+    const current = new Date()
+    return new Date(current.getTime() + 60*60000)
+}
 
 const Login = ()=> {
     const [userLogin, setLogin] = React.useState({})
@@ -22,6 +28,11 @@ const Login = ()=> {
     const clickHandler = async (event)=> {
         event.preventDefault()
 
+        if (validateEmail(userLogin.email) === false) {
+            console.log('invalid email')
+            return
+        } 
+
         const data = {
             email: userLogin.email,
             password: userLogin.password
@@ -31,8 +42,11 @@ const Login = ()=> {
         if (res.ok === true) {
             console.log(res)
 
+            const expdate = add30()
+
             await cookies.set('tokenv6', res.token, {
                 path: '/',
+                expires: expdate
             })
 
             router.push('./dashboard')
@@ -48,7 +62,7 @@ const Login = ()=> {
                     <input type="email" placeholder="your email" onChange={changeHandler} name="email"></input>
                 </div>
                 <div>
-                    <label htmlFor="email">Enter your password</label>
+                    <label htmlFor="password">Enter your password</label>
                     <input type="password" onChange={changeHandler} name="password"></input>
                 </div>
                 <button onClick={clickHandler}>submit</button>

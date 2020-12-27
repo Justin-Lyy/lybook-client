@@ -19,7 +19,7 @@ const validate = async (token)=> {
     // console.log(res)
 
     if (res.ok === true) {
-      return false
+      return true  
     }
 
     return false
