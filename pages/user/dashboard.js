@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import validate from '../../util/validate'
 import React from 'react'
 import Link from 'next/link'
+import getDashboard from '../../util/user/dashboardUtil'
 
 const Dashboard = (pageProps) => {
     const router = useRouter()
@@ -16,7 +17,7 @@ const Dashboard = (pageProps) => {
     return (
         <>
             <div>this page requires authentication</div>
-            { pageProps.items.map( item => {
+            {/* { pageProps.items.map( item => {
                 return (
                     <div key={item.id}>
                         <h2>{item.name}</h2>
@@ -27,7 +28,7 @@ const Dashboard = (pageProps) => {
                         </Link>
                     </div>
                 )
-            }) }
+            }) } */}
             
             <hr/>
 
@@ -43,26 +44,9 @@ export async function getServerSideProps(context) {
     try {   
         const res = await validate(context.req.cookies.tokenv6)
         
-        const items = [
-            {
-                name: 'keyboard',
-                price: '100',
-                amazon_id: '123',
-                id: "1"
-            },
-            {
-                name: 'mouse',
-                price: '50',
-                amazon_id: '123',
-                id: "2"
-            },
-            {
-                name: 'mouse pad',
-                price: '20',
-                amazon_id: '123',
-                id: "3"
-            }
-        ]
+        if (!res) throw 'User not authenticated'
+
+        const items = await getDashboard(context.req.cookies.tokenv6)
 
         return {
             props: {items: items, valid: res},
@@ -70,6 +54,9 @@ export async function getServerSideProps(context) {
 
     } catch (error) {
         console.error(error)
+        return {
+            props: {valid: false},
+        }
     }
     
 }

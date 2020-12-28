@@ -1,7 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import validate from '../../util/validate'
-import addItem from '../../util/newItem'
+import newItem from '../../util/item/newItemUtil'
+import addItem from '../../util/user/addItemUtil'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -45,12 +46,12 @@ const NewItem = (pageProps)=> {
                 link: info.link
             }
     
-            const res2 = await addItem(data, cookies.get('tokenv6')) 
+            const res2 = await newItem(data, cookies.get('tokenv6')) 
+            if (!res2.ok) throw "Error creating the item you wanted"
 
-            if (res2.ok) {
-                setInfo({})
-                router.push(`/item/${res2.item._id}`)
-            }
+            const res3 = await addItem(res2.item._id, cookies.get('tokenv6')) 
+                
+            router.push(`/item/${res2.item._id}`)
 
         } catch (error) {
             console.error(error)

@@ -1,5 +1,5 @@
 import React from 'react'
-import login from '../../util/login'
+import login from '../../util/user/loginUtil'
 import Cookies from 'universal-cookie'
 import { useRouter } from 'next/router'
 import validateEmail from '../../util/emailRegex'

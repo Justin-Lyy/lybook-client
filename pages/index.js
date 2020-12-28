@@ -1,7 +1,6 @@
 
 import Link from 'next/link'
 import React from 'react'
-import login from '../util/login'
 import Cookies from 'universal-cookie'
 
 const data = {'email': 'justin@gmail.com', 'password': 'testing'}
