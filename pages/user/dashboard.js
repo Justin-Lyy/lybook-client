@@ -1,5 +1,4 @@
-import { Router, useRouter } from 'next/router'
-import Cookies from 'universal-cookie'
+import { useRouter } from 'next/router'
 import validate from '../../util/validate'
 import React from 'react'
 import Link from 'next/link'
@@ -29,6 +28,12 @@ const Dashboard = (pageProps) => {
                     </div>
                 )
             }) }
+            
+            <hr/>
+
+            <Link href="../item/newItem">
+                <a>add a new item</a>
+            </Link>
         </>
     )
 }

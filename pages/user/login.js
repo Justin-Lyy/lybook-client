@@ -59,11 +59,11 @@ const Login = ()=> {
             <form>
                 <div>
                     <label htmlFor="email">Enter your email</label>
-                    <input type="email" placeholder="your email" onChange={changeHandler} name="email"></input>
+                    <input type="email" placeholder="your email" onChange={changeHandler} name="email" required={true}></input>
                 </div>
                 <div>
                     <label htmlFor="password">Enter your password</label>
-                    <input type="password" onChange={changeHandler} name="password"></input>
+                    <input type="password" onChange={changeHandler} name="password" required={true}></input>
                 </div>
                 <button onClick={clickHandler}>submit</button>
             </form>

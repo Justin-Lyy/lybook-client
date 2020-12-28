@@ -48,15 +48,15 @@ const Register = ()=> {
             <form>
                 <div>
                     <label htmlFor="email">Enter your email</label>
-                    <input type="email" placeholder="your email" onChange={changeHandler} name="email"></input>
+                    <input type="email" onChange={changeHandler} name="email" required></input>
                 </div>
                 <div>
                     <label htmlFor="password">Enter your password</label>
-                    <input type="password" onChange={changeHandler} name="password"></input>
+                    <input type="password" onChange={changeHandler} name="password" required></input>
                 </div>
                 <div>
                     <label htmlFor="confirm">Confirm your password</label>
-                    <input type="password" onChange={changeHandler} name="confirm"></input>
+                    <input type="password" onChange={changeHandler} name="confirm" required></input>
                 </div>
                 <button onClick={clickHandler}>submit</button>
             </form>
