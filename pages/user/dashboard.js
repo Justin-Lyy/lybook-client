@@ -17,18 +17,18 @@ const Dashboard = (pageProps) => {
     return (
         <>
             <div>this page requires authentication</div>
-            {/* { pageProps.items.map( item => {
+            { pageProps.items.map( item => {
                 return (
-                    <div key={item.id}>
+                    <div key={item._id}>
                         <h2>{item.name}</h2>
                         <p>price: {item.price}</p>
-                        <p>amazon id: {item.amazon_id}</p>
-                        <Link href={`../item/${item.id}`}>
+                        <p>amazon id: {item.ASIN}</p>
+                        <Link href={`../item/${item._id}`}>
                             <a>more info</a>
                         </Link>
                     </div>
                 )
-            }) } */}
+            }) }
             
             <hr/>
 
@@ -46,7 +46,11 @@ export async function getServerSideProps(context) {
         
         if (!res) throw 'User not authenticated'
 
-        const items = await getDashboard(context.req.cookies.tokenv6)
+        const res2 = await getDashboard(context.req.cookies.tokenv6)
+
+        const items = Object.keys(res2).map(key => res2[key])
+
+        console.log(items)
 
         return {
             props: {items: items, valid: res},
