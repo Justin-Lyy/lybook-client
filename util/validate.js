@@ -10,12 +10,8 @@ const validate = async (token)=> {
           'Authorization': 'Bearer ' + token 
         },
     }
-    
-    // options = JSON.stringify(options)
 
     const res = await fetch(`${serverLink}/auth/ping`, options)
-
-    // console.log(token)
 
     return res.ok
 }

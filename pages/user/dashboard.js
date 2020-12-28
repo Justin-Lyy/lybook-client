@@ -17,7 +17,7 @@ const Dashboard = (pageProps) => {
     return (
         <>
             <div>this page requires authentication</div>
-            { pageProps.items.map( item => {
+            { pageProps.valid ? pageProps.items.map( item => {
                 return (
                     <div key={item._id}>
                         <h2>{item.name}</h2>
@@ -28,7 +28,7 @@ const Dashboard = (pageProps) => {
                         </Link>
                     </div>
                 )
-            }) }
+            }): ''}
             
             <hr/>
 
