@@ -3,12 +3,31 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import validate from '../../util/validate'
 import getItem from '../../util/item/getItemUtil'
+import removeItem from '../../util/item/removeItemUtil'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 const Item = (pageProps) => {
     const router = useRouter()
 
-    const handleClick = (event) => {
-        console.log('deleting')
+    const handleClick = async (event) => {
+        event.preventDefault()
+
+        try {   
+            const res = await validate(cookies.get('tokenv6'))
+            console.log('Validated')
+
+            if (!res) router.push('./login')
+
+            const res2 = await removeItem(pageProps.item._id, cookies.get('tokenv6')) 
+            if (!res2.ok) throw "Error removing the item you specified" 
+                
+            
+
+        } catch (error) {
+            console.error(error)
+        }    
     }
 
     React.useEffect(async ()=>{
