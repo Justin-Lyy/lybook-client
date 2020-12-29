@@ -5,6 +5,9 @@ import validate from '../../util/validate'
 import getItem from '../../util/item/getItemUtil'
 import removeItem from '../../util/item/removeItemUtil'
 import Cookies from 'universal-cookie'
+import Layout from '../../components/layout'
+import styles from '../../styles/styles.module.css'
+import { Container } from 'react-bootstrap'
 
 const cookies = new Cookies()
 
@@ -36,15 +39,17 @@ const Item = (pageProps) => {
     },[])
 
     return (
-        <>
-            <p>item stuff</p>
-            <Link href={'../user/dashboard'}>
-                <a>Back to dashboard</a>
-            </Link>
-            <form>
-                <buton onClick={handleClick}>Remove Item</buton>
-            </form>
-        </>
+        <Layout>
+            <Container className={styles.vcenter}>
+                <p>item stuff</p>
+                <Link href={'../user/dashboard'}>
+                    <a>Back to dashboard</a>
+                </Link>
+                <form>
+                    <buton onClick={handleClick}>Remove Item</buton>
+                </form>
+            </Container>
+        </Layout>
     )
 } 
 

@@ -71,11 +71,12 @@ const NewItem = (pageProps)=> {
             if (!res2.ok) throw "Error creating the item you wanted"
 
             const res3 = await addItem(res2.item._id, cookies.get('tokenv6')) 
-            if (!res3.ok) throw "Error creating the item you wanted"
+            if (!res3.ok) throw "Error adding the item you wanted"
                 
             router.push(`/item/${res2.item._id}`)
 
         } catch (error) {
+            console.error(error)
             setFormVal('There was a problem adding your item, please check your inputs')
         }    
     }
