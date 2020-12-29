@@ -1,0 +1,15 @@
+.vcenter {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formstyles {
+    width: 50vh;
+}
+
+.submitbtn {
+    border: none;
+}

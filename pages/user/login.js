@@ -3,6 +3,9 @@ import login from '../../util/user/loginUtil'
 import Cookies from 'universal-cookie'
 import { useRouter } from 'next/router'
 import validateEmail from '../../util/emailRegex'
+import Layout from '../../components/layout'
+import {Container } from 'react-bootstrap'
+import styles from '../../styles/styles.module.css'
 
 const cookies = new Cookies()
 
@@ -13,6 +16,7 @@ const add30 = () => {
 
 const Login = ()=> {
     const [userLogin, setLogin] = React.useState({})
+    const [formVal, setFormVal] = React.useState()
     const router = useRouter()
 
     const changeHandler = (event) => {
@@ -29,9 +33,9 @@ const Login = ()=> {
         event.preventDefault()
 
         if (validateEmail(userLogin.email) === false) {
-            console.log('invalid email')
+            setFormVal('Invalid Email')
             return
-        } 
+        }
 
         const data = {
             email: userLogin.email,
@@ -49,26 +53,47 @@ const Login = ()=> {
                 expires: expdate
             })
 
+            setFormVal('')
+
             router.push('./dashboard')
+        } else{
+            setFormVal('Please check your credentials')
         }        
     }
 
     return (
-        <div>
-            <h1>Login form</h1>
-            <form>
-                <div>
-                    <label htmlFor="email">Enter your email</label>
-                    <input type="email" placeholder="your email" onChange={changeHandler} name="email" required={true}></input>
+        <Layout>
+            <Container className={`${styles.vcenter}`}>
+                <div className="p-4">
+                    <h2 className="w-100 text-center">Login</h2>
+                    <hr/>
+                    <form className={styles.formstyles}>
+                        <div className="input-group my-4">
+                            <span className="input-group-text">user@email.com</span>
+                            <input type="email" 
+                                    onChange={changeHandler} 
+                                    name="email" 
+                                    required={true}
+                                    className="form-control"
+                            ></input>
+                        </div>
+                        <div className="input-group mb-4">
+                            <span className="input-group-text">Password</span>
+                            <input type="password" 
+                                    onChange={changeHandler} 
+                                    name="password" 
+                                    required={true}
+                                    className="form-control"
+                            ></input>
+                        </div>
+                        <button type="button" className={`${styles.submitbtn} mb-4 btn btn-primary w-100`} 
+                                onClick={clickHandler}
+                        >Login</button>
+                        <p className="text-danger w-100 text-center">{formVal}</p>
+                    </form>
                 </div>
-                <div>
-                    <label htmlFor="password">Enter your password</label>
-                    <input type="password" onChange={changeHandler} name="password" required={true}></input>
-                </div>
-                <button onClick={clickHandler}>submit</button>
-            </form>
-            <p>{userLogin.email}</p>
-        </div>
+            </Container>
+        </Layout>
     )
 }
 

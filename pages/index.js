@@ -1,33 +1,39 @@
-
-import Link from 'next/link'
 import React from 'react'
+import { Container, Row } from 'react-bootstrap'
 import Cookies from 'universal-cookie'
-
-const data = {'email': 'justin@gmail.com', 'password': 'testing'}
-const cookies = new Cookies()
-
-const add30 = () => {
-  const current = new Date()
-  return new Date (current.getTime() + 30*60000)
-} 
+import Layout from '../components/layout' 
+import styles from '../styles/styles.module.css'
+import Link from 'next/link'
 
 const Home = (pageProps) => {
 
   return (
-    <React.Fragment>
-      <div>Home page</div>
-      <p>login to get started</p>
-      <div>
-        <Link href={'/user/login'}>
-          <a>login</a>
-        </Link>
-      </div>
-      <div>
-        <Link href={'/user/login'}>
-          <a>register</a>
-        </Link>
-      </div>
-    </React.Fragment>
+    <>
+      <Layout>
+        <Container className={styles.vcenter}>
+          <Row>
+            <h1>Welcome!</h1>
+          </Row>
+          <Row>
+            <h5>LyBook is a web app designed to help you track items being sold on Amazon!</h5>
+          </Row>
+          <Row>
+            <p>
+              <Link href="/user/login">
+                <a>Login </a>
+              </Link>
+              or
+              <Link href="/user/register">
+                <a> Register </a>
+              </Link>
+              to get started
+            </p>
+            
+          </Row>
+        </Container>
+      </Layout>
+    </>
+
   )
 }
 

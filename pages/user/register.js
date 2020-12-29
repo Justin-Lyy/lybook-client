@@ -1,10 +1,14 @@
 import React from 'react'
 import validateEmail from '../../util/emailRegex'
-import register from '../../util/register'
+import register from '../../util/user/registerUtil'
 import { useRouter } from 'next/router'
+import Layout from '../../components/layout'
+import {Container } from 'react-bootstrap'
+import styles from '../../styles/styles.module.css'
 
 const Register = ()=> {
     const [userLogin, setLogin] = React.useState({})
+    const [formVal, setFormVal] = React.useState()
     const router = useRouter()
 
     const changeHandler = (event) => {
@@ -21,12 +25,17 @@ const Register = ()=> {
         event.preventDefault()
         
         if (validateEmail(userLogin.email) === false) {
-            console.log('invalid email')
+            setFormVal('Invalid Email')
             return
         } 
 
         if (userLogin.password !== userLogin.confirm) {
-            console.log(`passwords don't match`)
+            setFormVal("Your passwords don't match")
+            return
+        }
+
+        if (userLogin.password.length < 4) {
+            setFormVal("Your password should be at least 4 characters")
             return
         }
 
@@ -43,25 +52,46 @@ const Register = ()=> {
     }
 
     return (
-        <div>
-            <h1>Login form</h1>
-            <form>
-                <div>
-                    <label htmlFor="email">Enter your email</label>
-                    <input type="email" onChange={changeHandler} name="email" required></input>
-                </div>
-                <div>
-                    <label htmlFor="password">Enter your password</label>
-                    <input type="password" onChange={changeHandler} name="password" required></input>
-                </div>
-                <div>
-                    <label htmlFor="confirm">Confirm your password</label>
-                    <input type="password" onChange={changeHandler} name="confirm" required></input>
-                </div>
-                <button onClick={clickHandler}>submit</button>
-            </form>
-            <p>{userLogin.email}</p>
-        </div>
+        <Layout>
+            <Container className={styles.vcenter}>
+                <h2 className="w-100 text-center">Register</h2>
+                <form className={styles.formstyles}>
+                    <hr/>
+                    <label className="form-label mt-2" htmlFor="email">Enter your Email for Verification</label>
+                    <div className="input-group mb-4">
+                        <span className="input-group-text">user@email.com</span>
+                        <input type="email" 
+                                onChange={changeHandler} 
+                                name="email" 
+                                required={true}
+                                className="form-control"
+                        ></input>
+                    </div>
+                    <label className="form-label" htmlFor="password">Enter your Password</label>
+                    <div className="input-group mb-4">
+                        <input type="password" 
+                                onChange={changeHandler} 
+                                name="password" 
+                                required={true}
+                                className="form-control"
+                        ></input>
+                    </div>
+                    <label className="form-label" htmlFor="confirm">Confirm your Password</label>
+                    <div className="input-group mb-4">
+                        <input type="password" 
+                                onChange={changeHandler} 
+                                name="confirm" 
+                                required={true}
+                                className="form-control"
+                        ></input>
+                    </div>
+                    <button type="button" className={`${styles.submitbtn} mb-4 btn btn-primary w-100`} 
+                            onClick={clickHandler}
+                    >Login</button>
+                    <p className="text-danger w-100 text-center">{formVal}</p>
+                </form>
+            </Container>
+        </Layout>
     )
 }
 
