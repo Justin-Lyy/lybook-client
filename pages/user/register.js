@@ -29,6 +29,11 @@ const Register = ()=> {
             return
         } 
 
+        if (userLogin.password === undefined || userLogin.password === undefined) {
+            setFormVal("Your password field(s) are empty")
+            return
+        }
+
         if (userLogin.password !== userLogin.confirm) {
             setFormVal("Your passwords don't match")
             return

@@ -16,7 +16,7 @@ const NewItem = (pageProps)=> {
     const [formVal, setFormVal] = React.useState()
 
     React.useEffect(async ()=>{
-        // if (pageProps.valid === false) router.push('./login')
+        if (pageProps.valid === false) router.push('./login')
         
         console.log('authenticated')
     },[])
@@ -82,7 +82,7 @@ const NewItem = (pageProps)=> {
 
     return (
         <Layout>
-            <Container className={styles.vcenter}>
+            { pageProps.valid ? <Container className={styles.vcenter}>
                 <div className="p-4">
                     <h2 className="w-100 text-center">Start Tracking a New Item</h2>
                     <hr/>
@@ -111,14 +111,14 @@ const NewItem = (pageProps)=> {
                         <p className="text-danger w-100 text-center">{formVal}</p>
                     </form>
                 </div>
-            </Container>
+            </Container> : ''}
         </Layout>
     )
 }
 
 export async function getServerSideProps(context) {
     try {   
-        // const res = await validate(context.req.cookies.tokenv6)
+        const res = await validate(context.req.cookies.tokenv6)
 
         return {
             props: {valid: true},
