@@ -22,24 +22,26 @@ const Dashboard = (pageProps) => {
             { pageProps.valid ? 
                 <Container className={styles.vcenter}>
                     <h2>Dashboard</h2>
-                    <hr className="w-100"/>
+                    <hr className="w-75"/>
                     { (pageProps.items.length !== 0) ? pageProps.items.map( item => {
                         return (
-                            <div key={item._id} className="w-100 text-left">
+                            <div key={item._id} className="w-75 text-left">
                                 <h4>{item.name}</h4>
-                                <Link href={`../item/${item._id}`}>
+                                <Link href={`/item/${item._id}`}>
                                     <a className="d-block mb-2">More Info</a>
                                 </Link>
                                 <p className="d-inline">Price: {item.status === 'Price updated' ? item.price: "No price availabe"}</p>
                                 <p className="d-inline mx-4">Amazon ID (ASIN): {item.ASIN}</p>
                                 <p className="d-inline mx-2">Last updated: {item.date.length !== 0 ? item.date[item.date.length-1] : "Never"}</p>
                                 <a className="d-inline mx-2" href={item.link}>Amazon Link</a>
+                                <hr className="w-100"/>
                             </div>
                         )
-                    }): <p className="mt-3">You aren't tracking any items at the moment</p>}
+                    }): <>
+                        <p className="mt-3">You aren't tracking any items at the moment</p>
+                        <hr className="w-100"/>
+                        </>}
                     
-                    <hr className="w-100"/>
-
                     <Link href="/item/newItem">
                         <a className="p-2 bg-primary text-light rounded w-25 text-center my-3">Add a New Item</a>
                     </Link>

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import Cookies from 'universal-cookie'
 import Layout from '../components/layout' 
 import styles from '../styles/styles.module.css'
 import Link from 'next/link'
@@ -31,6 +30,9 @@ const Home = (pageProps) => {
             
           </Row>
         </Container>
+        <footer className="fixed-bottom bg-dark p-3">
+                <a className="text-primary" href="https://github.com/Justin-Lyy/">https://github.com/Justin-Lyy/</a>
+        </footer>
       </Layout>
     </>
 

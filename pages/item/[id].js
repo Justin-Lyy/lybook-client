@@ -46,7 +46,7 @@ const Item = (pageProps) => {
                     <hr/>
                     <p className={`p-2 bg-${pageProps.item.status === 'Price updated' ? 'success': 'danger'} rounded text-light text-center`}>Status: {pageProps.item.status}</p>
                     <h5 className="d-inline">Last updated: {pageProps.item.date.length !== 0 ? pageProps.item.date[pageProps.item.date.length-1] : "Never"}</h5>
-                    <h5 className="d-inline mx-4">Current Price: {pageProps.item.price.length !== 0 ? "$" + pageProps.item.price[pageProps.item.price.length-1] : "Never"}</h5>
+                    <h5 className="d-inline mx-4">Last Price: {pageProps.item.price.length !== 0 ? "$" + pageProps.item.price[pageProps.item.price.length-1] : "None Listed"}</h5>
                     <form>
                         <button className={`${styles.submitbtn} mb-4 btn btn-danger w-25`} onClick={handleClick}>Remove Item</button>
                     </form>

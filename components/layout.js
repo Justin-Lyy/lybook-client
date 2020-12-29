@@ -27,10 +27,6 @@ const Layout = ({children}) => {
                 </Nav>
             </Navbar>        
             {children}
-
-            <footer className="fixed-bottom bg-dark p-3">
-                <a className="text-primary" href="https://github.com/Justin-Lyy/">https://github.com/Justin-Lyy/</a>
-            </footer>
         </React.Fragment>
     )
 }
