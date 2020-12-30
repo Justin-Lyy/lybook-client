@@ -8,6 +8,7 @@ import Layout from '../../components/layout'
 import styles from '../../styles/styles.module.css'
 import { Container } from 'react-bootstrap'
 import { Line } from 'react-chartjs-2'
+// import Datetime from 'luxon/src/datetime.js'
 
 const cookies = new Cookies()
 
@@ -17,25 +18,25 @@ const Item = (pageProps) => {
     const handleClick = async (event) => {
         event.preventDefault()
 
-        // try {   
-        //     const res = await validate(cookies.get('tokenv6'))
-        //     console.log('Validated')
+        try {   
+            const res = await validate(cookies.get('tokenv6'))
+            console.log('Validated')
 
-        //     if (!res) router.push('./login')
+            if (!res) router.push('./login')
 
-        //     const res2 = await removeItem(pageProps.item._id, cookies.get('tokenv6')) 
-        //     if (!res2.ok) throw "Error removing the item you specified" 
+            const res2 = await removeItem(pageProps.item._id, cookies.get('tokenv6')) 
+            if (!res2.ok) throw "Error removing the item you specified" 
                 
             
 
-        // } catch (error) {
-        //     console.error(error)
-        // }    
+        } catch (error) {
+            console.error(error)
+        }    
     }
 
     React.useEffect(async ()=>{
         if (pageProps.valid === false) router.push('../user/login')
-        console.log(pageProps)
+        pageProps.item.date = pageProps.item.date.map( d => new Date(d).toLocaleString())
     },[])
 
     return (
@@ -45,18 +46,18 @@ const Item = (pageProps) => {
                     <h2 className="mt-4">{pageProps.item.name}</h2>
                     <hr/>
                     <p className={`p-2 bg-${pageProps.item.status === 'Price updated' ? 'success': 'danger'} rounded text-light text-center`}>Status: {pageProps.item.status}</p>
-                    <h5 className="d-inline">Last updated: {pageProps.item.date.length !== 0 ? pageProps.item.date[pageProps.item.date.length-1] : "Never"}</h5>
+                    <h5 className="d-inline">Last Updated: {pageProps.item.date.length !== 0 ? pageProps.item.date[pageProps.item.date.length-1] : "Never"}</h5>
                     <h5 className="d-inline mx-4">Last Price: {pageProps.item.price.length !== 0 ? "$" + pageProps.item.price[pageProps.item.price.length-1] : "None Listed"}</h5>
                     <div className="mt-4">
                         <Line
                             data= {{
-                                labels: pageProps.item.date,
+                                labels: pageProps.item.date.map( d => new Date(d).toLocaleString()),
                                 datasets: [
                                     {
                                         data: pageProps.item.price,
                                         fill: true,  
-                                        backgroundColor:'rgb(2, 117, 216)',
-                                        borderColor: 'rgba(2, 117, 216, 0.2)',
+                                        borderColor:'rgb(2, 117, 216)',
+                                        backgroundColor: 'rgba(2, 117, 216, 0.5)',
                                         label: 'Price'
                                     },
                                 ]
@@ -81,6 +82,8 @@ export async function getServerSideProps(context) {
         if (!res) throw 'User not authenticated'
 
         const res2 = await getItem(item_id, context.req.cookies.tokenv6)
+
+        if (!res2.ok)
 
         return {
             props: {item: res2, valid: res}
