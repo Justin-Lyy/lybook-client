@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import React from 'react'
 import { useRouter } from 'next/router'
 import validate from '../../util/validate'
@@ -8,6 +7,7 @@ import Cookies from 'universal-cookie'
 import Layout from '../../components/layout'
 import styles from '../../styles/styles.module.css'
 import { Container } from 'react-bootstrap'
+import { Line } from 'react-chartjs-2'
 
 const cookies = new Cookies()
 
@@ -41,13 +41,29 @@ const Item = (pageProps) => {
     return (
         <Layout>
             <Container className={styles.vcenter}>
-                <div className="p-4 w-100">
-                    <h2>{pageProps.item.name}</h2>
+                <div className="pt-4 w-100">
+                    <h2 className="mt-4">{pageProps.item.name}</h2>
                     <hr/>
                     <p className={`p-2 bg-${pageProps.item.status === 'Price updated' ? 'success': 'danger'} rounded text-light text-center`}>Status: {pageProps.item.status}</p>
                     <h5 className="d-inline">Last updated: {pageProps.item.date.length !== 0 ? pageProps.item.date[pageProps.item.date.length-1] : "Never"}</h5>
                     <h5 className="d-inline mx-4">Last Price: {pageProps.item.price.length !== 0 ? "$" + pageProps.item.price[pageProps.item.price.length-1] : "None Listed"}</h5>
-                    <form>
+                    <div className="mt-4">
+                        <Line
+                            data= {{
+                                labels: pageProps.item.date,
+                                datasets: [
+                                    {
+                                        data: pageProps.item.price,
+                                        fill: true,  
+                                        backgroundColor:'rgb(2, 117, 216)',
+                                        borderColor: 'rgba(2, 117, 216, 0.2)',
+                                        label: 'Price'
+                                    },
+                                ]
+                            }}
+                        />
+                    </div>
+                    <form className="mt-4">
                         <button className={`${styles.submitbtn} mb-4 btn btn-danger w-25`} onClick={handleClick}>Remove Item</button>
                     </form>
                 </div>
