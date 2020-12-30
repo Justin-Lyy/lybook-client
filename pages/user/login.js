@@ -6,6 +6,7 @@ import validateEmail from '../../util/emailRegex'
 import Layout from '../../components/layout'
 import {Container } from 'react-bootstrap'
 import styles from '../../styles/styles.module.css'
+import validate from '../../util/validate'
 
 const cookies = new Cookies()
 
@@ -14,10 +15,17 @@ const add30 = () => {
     return new Date(current.getTime() + 60*60000)
 }
 
-const Login = ()=> {
+const Login = (pageProps)=> {
     const [userLogin, setLogin] = React.useState({})
     const [formVal, setFormVal] = React.useState()
     const router = useRouter()
+
+    React.useEffect(async ()=>{
+        console.log(pageProps)
+        if (pageProps.valid === true) router.push('./dashboard')
+        
+        console.log('authenticated')
+    },[])
 
     const changeHandler = (event) => {
         const {name, value} = event.target
@@ -63,7 +71,7 @@ const Login = ()=> {
 
     return (
         <Layout>
-            <Container className={`${styles.vcenter}`}>
+            { pageProps.valid ? '': <Container className={`${styles.vcenter}`}>
                 <div className="p-4">
                     <h2 className="w-100 text-center">Login</h2>
                     <hr/>
@@ -92,9 +100,25 @@ const Login = ()=> {
                         <p className="text-danger w-100 text-center">{formVal}</p>
                     </form>
                 </div>
-            </Container>
+            </Container>}
         </Layout>
     )
+}
+
+export async function getServerSideProps(context) {
+    try {   
+        const res = await validate(context.req.cookies.tokenv6)
+
+        return {
+            props: {valid: res},
+        }
+    } catch (error) {
+        console.error(error)
+
+        return {
+            props: {valid: false},
+        }
+    }
 }
 
 export default Login
