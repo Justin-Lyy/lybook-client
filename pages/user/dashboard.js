@@ -20,7 +20,7 @@ const Dashboard = (pageProps) => {
     return (
         <Layout>
             { pageProps.valid ? 
-                <Container className={styles.vcenter}>
+                <Container className={styles.dashboard}>
                     <h2>Dashboard</h2>
                     <hr className="w-75"/>
                     { (pageProps.items.length !== 0) ? pageProps.items.map( item => {
