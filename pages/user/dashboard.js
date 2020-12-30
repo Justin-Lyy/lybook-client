@@ -8,14 +8,6 @@ import {Container} from 'react-bootstrap'
 import styles from '../../styles/styles.module.css'
 
 const Dashboard = (pageProps) => {
-    const router = useRouter()
-
-
-    React.useEffect(async ()=>{
-        if (pageProps.valid === false) router.push('./login')
-        
-        console.log(pageProps.items)
-    },[])
 
     return (
         <Layout>
@@ -39,10 +31,10 @@ const Dashboard = (pageProps) => {
                         )
                     }): <>
                         <p className="mt-3">You aren't tracking any items at the moment</p>
-                        <hr className="w-100"/>
+                        <hr className="w-75"/>
                         </>}
                     
-                    <Link href="/item/newItem">
+                    <Link href="../user/newItem">
                         <a className="p-2 bg-primary text-light rounded w-25 text-center my-3">Add a New Item</a>
                     </Link>
                 </Container>
