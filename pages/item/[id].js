@@ -36,12 +36,17 @@ const Item = (pageProps) => {
 
     React.useEffect(async ()=>{
         if (pageProps.valid === false) router.push('../user/login')
-        pageProps.item.date = pageProps.item.date.map( d => new Date(d).toLocaleString())
+        if (pageProps.item.resCode === 404) router.push('/404')
+        if (pageProps.item.resCode === 403) router.push('/403')
+        else {
+            pageProps.item.date = pageProps.item.date.map( d => new Date(d).toLocaleString())
+        }
+
     },[])
 
     return (
         <Layout>
-            <Container className={styles.vcenter}>
+            { pageProps.valid && pageProps.item.ok ? <Container className={styles.vcenter}>
                 <div className="pt-4 w-100">
                     <h2 className="mt-4">{pageProps.item.name}</h2>
                     <hr/>
@@ -68,7 +73,7 @@ const Item = (pageProps) => {
                         <button className={`${styles.submitbtn} mb-4 btn btn-danger w-25`} onClick={handleClick}>Remove Item</button>
                     </form>
                 </div>
-            </Container>
+            </Container>: ''}
         </Layout>
     )
 } 
@@ -83,11 +88,9 @@ export async function getServerSideProps(context) {
 
         const res2 = await getItem(item_id, context.req.cookies.tokenv6)
 
-        if (!res2.ok)
+        console.log(res2)
 
-        return {
-            props: {item: res2, valid: res}
-        }
+        return { props: {item: res2, valid: res} }
     } catch (error) {
         console.error(error)
         return {

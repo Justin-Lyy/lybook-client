@@ -15,18 +15,15 @@ const getItem = async (itemid, token) => {
         const res = await fetch(`${serverLink}/items/${itemid}`, options)
         const jsonres = await res.json()
 
-        // console.log(res)
-
         if (res.ok) {
-            return {...jsonres}
+            return {...jsonres, ok: res.ok, resCode: res.status}
         }
-        
-        // console.log(res)
 
-        // throw 'Failed to add item'
+        throw res.status
+        
     } catch(error) {
         console.log(error)
-        return undefined
+        return {ok: false, resCode: error}
     }
 }   
 
