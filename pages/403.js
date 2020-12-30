@@ -2,7 +2,6 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import Layout from '../components/layout' 
 import styles from '../styles/styles.module.css'
-import Link from 'next/link'
 
 const Home = (pageProps) => {
 
