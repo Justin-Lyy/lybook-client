@@ -8,7 +8,6 @@ import Layout from '../../components/layout'
 import styles from '../../styles/styles.module.css'
 import { Container } from 'react-bootstrap'
 import { Line } from 'react-chartjs-2'
-// import Datetime from 'luxon/src/datetime.js'
 
 const cookies = new Cookies()
 
@@ -20,15 +19,13 @@ const Item = (pageProps) => {
 
         try {   
             const res = await validate(cookies.get('tokenv6'))
-            console.log('Validated')
 
             if (!res) router.push('./login')
 
             const res2 = await removeItem(pageProps.item._id, cookies.get('tokenv6')) 
             if (!res2.ok) throw "Error removing the item you specified" 
-                
-            
 
+            router.push('../user/dashboard')
         } catch (error) {
             console.error(error)
         }    
@@ -87,8 +84,6 @@ export async function getServerSideProps(context) {
         if (!res) throw 'User not authenticated'
 
         const res2 = await getItem(item_id, context.req.cookies.tokenv6)
-
-        console.log(res2)
 
         return { props: {item: res2, valid: res} }
     } catch (error) {

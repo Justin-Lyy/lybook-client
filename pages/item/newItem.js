@@ -16,6 +16,7 @@ const NewItem = (pageProps)=> {
     const [formVal, setFormVal] = React.useState()
 
     React.useEffect(async ()=>{
+        console.log(pageProps)
         if (pageProps.valid === false) router.push('./login')
         
         console.log('authenticated')
@@ -122,7 +123,7 @@ export async function getServerSideProps(context) {
         const res = await validate(context.req.cookies.tokenv6)
 
         return {
-            props: {valid: true},
+            props: {valid: res},
         }
     } catch (error) {
         console.error(error)

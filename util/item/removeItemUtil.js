@@ -24,9 +24,7 @@ const getItem = async (itemid, token) => {
         options.method = 'delete'
         const res2 = await fetch(`${serverLink}/items/deleteItem`, options)
 
-        if (res2.ok) {
-            return {res2, res, ok: res2.ok}
-        }
+        return {res2, res, ok: res.ok}
     } catch(error) {
         console.log(error)
         return undefined
