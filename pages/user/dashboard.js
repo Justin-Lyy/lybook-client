@@ -54,8 +54,6 @@ export async function getServerSideProps(context) {
 
         const items = Object.keys(res2).map(key => res2[key])
 
-        console.log(items)
-
         return {
             props: {items: items, valid: res},
         }

@@ -16,10 +16,8 @@ const NewItem = (pageProps)=> {
     const [formVal, setFormVal] = React.useState()
 
     React.useEffect(async ()=>{
-        console.log(pageProps)
         if (pageProps.valid === false) router.push('./login')
         
-        console.log('authenticated')
     },[])
 
     const changeHandler = (event, autoValue) => {
@@ -58,7 +56,6 @@ const NewItem = (pageProps)=> {
 
         try {   
             const res = await validate(cookies.get('tokenv6'))
-            console.log('Validated')
 
             if (!res) router.push('./login')
 

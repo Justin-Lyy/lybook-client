@@ -22,7 +22,6 @@ const getItem = async (itemid, token) => {
         throw res.status
         
     } catch(error) {
-        console.log(error)
         return {ok: false, resCode: error}
     }
 }   

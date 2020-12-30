@@ -16,13 +16,8 @@ const addItem = async (itemid, token) => {
         body: JSON.stringify(data) 
     }
 
-    console.log('this is the id')
-    console.log(data)
-
     try {
         const res = await fetch(`${serverLink}/user/addItem`, options)
-
-        console.log(res.ok)
         
         if (res.ok) {
             return {res, ok: true}
@@ -30,7 +25,6 @@ const addItem = async (itemid, token) => {
         
         // throw 'Failed to add item'
     } catch(error) {
-        console.log(error)
         return {ok: false}
     }
 }

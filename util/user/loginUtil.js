@@ -10,8 +10,6 @@ const login = async (data) => {
         },
         body: JSON.stringify(data)
     }
-  
-    console.log(data)
 
     try {
         const res = await fetch(`${serverLink}/auth/login`, options)
@@ -23,7 +21,6 @@ const login = async (data) => {
         
         throw 'Login failed'
     } catch(error) {
-        console.log(error)
         return {ok: false}
     }
 }

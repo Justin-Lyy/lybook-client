@@ -13,10 +13,8 @@ const Register = (pageProps)=> {
     const router = useRouter()
 
     React.useEffect(async ()=>{
-        console.log(pageProps)
         if (pageProps.valid === true) router.push('./dashboard')
         
-        console.log('authenticated')
     },[])
 
     const changeHandler = (event) => {

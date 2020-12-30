@@ -26,7 +26,6 @@ const getItem = async (itemid, token) => {
 
         return {res2, res, ok: res.ok}
     } catch(error) {
-        console.log(error)
         return undefined
     }
 }   

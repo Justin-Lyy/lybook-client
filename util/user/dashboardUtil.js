@@ -20,12 +20,9 @@ const getDashboard = async (token) => {
         if (res.ok) {
             return {...jsonres}
         }
-        
-        console.log(res)
 
         throw 'Failed to add item'
     } catch(error) {
-        console.log(error)
         return undefined
     }
 }   

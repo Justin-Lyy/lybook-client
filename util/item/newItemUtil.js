@@ -14,9 +14,6 @@ const addItem = async (data, token) => {
         body: JSON.stringify(data)
     }
 
-    console.log('this is the data')
-    console.log(data)
-
     try {
         const res = await fetch(`${serverLink}/items/newItem`, options)
         const jsonres = await res.json()
@@ -27,7 +24,6 @@ const addItem = async (data, token) => {
         
         throw 'Failed to add item'
     } catch(error) {
-        console.log(error)
         return {ok: false}
     }
 }

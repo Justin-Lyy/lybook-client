@@ -3,7 +3,6 @@ const serverLink = 'http://localhost:8888'
 // ={'email': 'justin@gmail.com', 'password': 'testing'}
 
 const register = async (data) => {
-    console.log(data)
 
     var options = {
         method: 'post',
@@ -12,8 +11,6 @@ const register = async (data) => {
         },
         body: JSON.stringify(data)
     }
-
-    console.log(data)
 
     try {
         const res = await fetch(`${serverLink}/auth/signup`, options)
@@ -25,7 +22,6 @@ const register = async (data) => {
         
         throw 'registration failed'
     } catch(error) {
-        console.log(error)
         return {ok: false}
     }
 }

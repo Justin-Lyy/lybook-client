@@ -21,10 +21,7 @@ const Login = (pageProps)=> {
     const router = useRouter()
 
     React.useEffect(async ()=>{
-        console.log(pageProps)
         if (pageProps.valid === true) router.push('./dashboard')
-        
-        console.log('authenticated')
     },[])
 
     const changeHandler = (event) => {
@@ -52,7 +49,6 @@ const Login = (pageProps)=> {
 
         const res = await login(data)
         if (res.ok === true) {
-            console.log(res)
 
             const expdate = add30()
 

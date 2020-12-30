@@ -12,7 +12,6 @@ const Layout = ({children}) => {
         cookies.remove('tokenv6', {
             path: '/'
         })
-        console.log(cookies.getAll())
 
         Router.push('/user/login')
     }
