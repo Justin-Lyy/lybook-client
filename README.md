@@ -23,4 +23,4 @@ This app is not currently being hosted on Vercel or GitHub pages.
 3. Follow the steps to setup the server [here](https://github.com/Justin-Lyy/lybook "Server Setup")
 4. Run `npm install`
 5. Run `npm start`
-6. Go to [localhost:3000](localhost:3000 "localhost:3000")
+6. Go to [localhost:3000](http://localhost:3000 "localhost:3000")
