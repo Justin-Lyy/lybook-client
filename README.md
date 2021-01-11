@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# lybook-client
 
-## Getting Started
+This a front-end for the LyBook project. It allows you to register an account and login so you can begin tracking item prices on Amazon. The price and status of items will be updated regularly from the server-side and you can view a chart of the items price over time. 
 
-First, run the development server:
+### Dependencies:
+* bootstrap: ^4.5.3
+* chart.js: ^2.9.4
+* luxon: ^1.25.0
+* next: 10.0.4
+* react: 17.0.1
+* react-bootstrap: ^1.4.0
+* react-chartjs-2: ^2.11.1
+* react-dom: 17.0.1
+* universal-cookie: ^4.0.4
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This app is not currently being hosted on Vercel or GitHub pages.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Local Installation
+1. Download the repository 
+2. Install [NodeJS](https://nodejs.org/en/ "Install NodeJS") if not done so already
+3. Follow the steps to setup the server [here](https://github.com/Justin-Lyy/lybook "Server Setup")
+4. Run `npm install`
+5. Run `npm start`
